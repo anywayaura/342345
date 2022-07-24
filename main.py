@@ -1,8 +1,8 @@
-import requests
-from datetime import datetime
-import os
-from aiogram import Bot
 import asyncio
+import os
+
+import requests
+from aiogram import Bot
 
 TOKEN = os.getenv('DVMNTKN')
 DVMN_NTF_BOT = os.getenv('dvmn_ntf_bot')
@@ -40,6 +40,3 @@ async def long_polling():
 
 if __name__ == '__main__':
     asyncio.run(long_polling())
-
-
-

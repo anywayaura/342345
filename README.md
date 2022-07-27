@@ -1,8 +1,7 @@
-Script checks updates for homework on dvmn.org
+### Script checks updates for homework on dvmn.org
 
-**usage:**
 
-Add your tokens here:
+**Add your tokens here:**
 
 `DVMN_API` -  dvmn.org user api-key
 

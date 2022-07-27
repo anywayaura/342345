@@ -28,7 +28,6 @@ async def dvmn_long_polling(DVMN_API_TOKEN, TG_NOTIFY_BOT, TG_CHAT_ID):
                         params = {"timestamp": data["timestamp_to_request"]}
                     elif data["status"] == "found":
                         params = {"timestamp": data["last_attempt_timestamp"]}
-                        await bot.send_message(TG_CHAT_ID, data)  # debug
                         for work in data['new_attempts']:
                             lesson_title = work["lesson_title"]
                             if work['is_negative']:

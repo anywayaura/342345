@@ -2,7 +2,14 @@ Script checks updates for homework on dvmn.org
 
 **usage:**
 
-Add your dvmn.org token, telegram bot token, and telegram_id to the environment variables.
+Add your tokens here:
+
+`DVMN_API` -  dvmn.org user api-key
+
+`TG_NOTIFY_BOT` - telegram bot token
+
+`TG_CHAT_ID` - telegram chat id to notify
+
 
 **installation:**
 

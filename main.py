@@ -17,11 +17,11 @@ async def dvmn_long_polling(DVMN_API_TOKEN, TG_NOTIFY_BOT, TG_CHAT_ID):
     params = dict()
     headers = {'Authorization': DVMN_API_TOKEN}
     print('Polling reviews...')
-    while True:
-        try:
-            async with aiohttp.ClientSession() as session:
-                async with session.get('https://dvmn.org/api/long_polling/', headers=headers,
-                                       params=params) as response:
+    async with aiohttp.ClientSession() as session:
+        while True:
+            try:
+                async with session.get('https://dvmn.org/api/long_polling/',
+                                       headers=headers, params=params) as response:
                     response.raise_for_status()
                     data = await response.json()
                     if data["status"] == "timeout":
@@ -37,13 +37,14 @@ async def dvmn_long_polling(DVMN_API_TOKEN, TG_NOTIFY_BOT, TG_CHAT_ID):
                             url = work['lesson_url']
                             await bot.send_message(TG_CHAT_ID, f'Работа "{lesson_title}" проверена: {result}\n{url}')
 
-        except asyncio.exceptions.TimeoutError:
-            return None
+            except asyncio.exceptions.TimeoutError:
+                return None
 
-        except ConnectionError as _exce:
-            print(f'No internet connection ({_exce})')
-            await asyncio.sleep(10)
+            except ConnectionError as _exce:
+                print(f'No internet connection ({_exce})')
+                await asyncio.sleep(10)
 
 
 if __name__ == '__main__':
     asyncio.run(dvmn_long_polling(DVMN_API, TG_NOTIFY_BOT, TG_CHAT_ID))
+

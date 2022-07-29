@@ -23,12 +23,12 @@ async def dvmn_long_polling(dvmn_api_token, tg_notify_bot, tg_chat_id):
                 async with session.get(
                         'https://dvmn.org/api/long_polling/', headers=headers, params=params) as response:
                     response.raise_for_status()
-                    reviews_json = await response.json()
-                    if reviews_json["status"] == "timeout":
-                        params = {"timestamp": reviews_json["timestamp_to_request"]}
-                    elif reviews_json["status"] == "found":
-                        params = {"timestamp": reviews_json["last_attempt_timestamp"]}
-                        for work in reviews_json['new_attempts']:
+                    reviews = await response.json()
+                    if reviews["status"] == "timeout":
+                        params = {"timestamp": reviews["timestamp_to_request"]}
+                    elif reviews["status"] == "found":
+                        params = {"timestamp": reviews["last_attempt_timestamp"]}
+                        for work in reviews['new_attempts']:
                             lesson_title = work["lesson_title"]
                             if work['is_negative']:
                                 result = 'Нужна доработка'
